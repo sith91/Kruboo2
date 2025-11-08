@@ -1,0 +1,54 @@
+app:
+  name: "AI Assistant Backend"
+  version: "1.0.0"
+  debug: false
+
+server:
+  host: "127.0.0.1"
+  port: 8000
+  cors_origins: ["http://localhost:5173", "http://127.0.0.1:5173"]
+
+database:
+  url: "sqlite+aiosqlite:///./ai_assistant.db"
+  echo: false
+
+ai:
+  models:
+    deepseek:
+      base_url: "https://api.deepseek.com/v1"
+      default_model: "deepseek-chat"
+    openai:
+      base_url: "https://api.openai.com/v1"
+      default_model: "gpt-4"
+    anthropic:
+      base_url: "https://api.anthropic.com/v1"
+      default_model: "claude-3-sonnet-20240229"
+    local:
+      model_path: "./models/llama2"
+      device: "auto"
+
+voice:
+  sample_rate: 16000
+  channels: 1
+  chunk_size: 1024
+  silence_threshold: 500
+  wake_word_sensitivity: 0.7
+
+storage:
+  data_dir: "./user_data"
+  models_dir: "./models"
+  temp_dir: "./temp"
+
+blockchain:
+  networks:
+    ethereum:
+      rpc_url: "https://mainnet.infura.io/v3/your-project-id"
+      chain_id: 1
+    polygon:
+      rpc_url: "https://polygon-rpc.com"
+      chain_id: 137
+
+security:
+  encryption_key: "your-encryption-key-here"
+  jwt_secret: "your-jwt-secret-here"
+  token_expiry_minutes: 1440
