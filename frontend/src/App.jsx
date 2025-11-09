@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthStore } from './stores/authStore';
 import { useConfigStore } from './stores/configStore';
+import { useAIStore } from './stores/aiStore';
 import LoadingScreen from './components/shared/LoadingScreen';
 import WelcomeScreen from './components/auth/WelcomeScreen';
 import LoginScreen from './components/auth/LoginScreen';
@@ -16,6 +17,9 @@ import './styles/globals.css';
 function App() {
   const { isAuthenticated, isLoading, checkAuth } = useAuthStore();
   const { setupComplete } = useConfigStore();
+   // AI Store will automatically initialize from persisted state
+  const { activeModel } = useAIStore();
+  
 
   useEffect(() => {
     checkAuth();
