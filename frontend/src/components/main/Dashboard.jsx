@@ -6,6 +6,9 @@ import CommandHistory from './CommandHistory';
 import QuickActions from './QuickActions';
 import SystemStatus from './SystemStatus';
 import { LogOut, Settings, User } from 'lucide-react';
+import CommandInput from './CommandInput';
+
+
 
 const Dashboard = () => {
   const { user, logout } = useAuthStore();
