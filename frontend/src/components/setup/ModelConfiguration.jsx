@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useConfigStore } from '../../stores/configStore';
+import { useAIStore } from '../../stores/aiStore';
 import { 
   Brain, 
   Zap, 
@@ -20,6 +21,7 @@ const ModelConfiguration = () => {
   const [apiKey, setApiKey] = useState('');
   const [localModelPath, setLocalModelPath] = useState('');
   const [isDownloading, setIsDownloading] = useState(false);
+  const { setActiveModel, isProcessing } = useAIStore();
 
   const models = [
     {
