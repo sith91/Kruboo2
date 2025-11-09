@@ -2,11 +2,38 @@
   "appId": "com.aiassistant.app",
   "productName": "AI Assistant",
   "directories": {
-    "output": "dist-electron"
+    "output": "dist-electron",
+    "buildResources": "build"
   },
   "files": [
     "dist/**/*",
-    "electron/**/*"
+    "electron/**/*",
+    "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+    "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+    "!**/node_modules/*.d.ts",
+    "!**/node_modules/.bin",
+    "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
+    "!.editorconfig",
+    "!**/._*",
+    "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
+    "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
+    "!**/{appveyor.yml,.travis.yml,circle.yml}",
+    "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
+  ],
+  "extraResources": [
+    {
+      "from": "../backend",
+      "to": "backend",
+      "filter": [
+        "**/*",
+        "!**/__pycache__",
+        "!**/*.pyc",
+        "!**/.venv",
+        "!**/env",
+        "!**/venv",
+        "!**/node_modules"
+      ]
+    }
   ],
   "mac": {
     "category": "public.app-category.productivity",
@@ -14,40 +41,70 @@
       {
         "target": "dmg",
         "arch": ["x64", "arm64"]
+      },
+      {
+        "target": "zip",
+        "arch": ["x64", "arm64"]
       }
     ],
     "darkModeSupport": true,
     "hardenedRuntime": true,
     "gatekeeperAssess": false,
-    "entitlements": "electron/entitlements.mac.plist",
-    "entitlementsInherit": "electron/entitlements.mac.plist"
+    "entitlements": "build/entitlements.mac.plist",
+    "entitlementsInherit": "build/entitlements.mac.plist",
+    "icon": "build/icon.icns"
   },
   "win": {
     "target": [
       {
         "target": "nsis",
         "arch": ["x64"]
+      },
+      {
+        "target": "portable",
+        "arch": ["x64"]
       }
     ],
-    "requestedExecutionLevel": "asInvoker"
+    "requestedExecutionLevel": "asInvoker",
+    "icon": "build/icon.ico"
   },
   "linux": {
     "target": [
       {
         "target": "AppImage",
         "arch": ["x64"]
+      },
+      {
+        "target": "deb",
+        "arch": ["x64"]
+      },
+      {
+        "target": "rpm",
+        "arch": ["x64"]
+      },
+      {
+        "target": "tar.gz",
+        "arch": ["x64"]
       }
     ],
-    "category": "Office"
+    "category": "Office",
+    "icon": "build/icon.png",
+    "desktop": {
+      "Name": "AI Assistant",
+      "Comment": "Privacy-first AI Assistant",
+      "Categories": "Office;Utility;"
+    }
   },
   "nsis": {
     "oneClick": false,
     "allowToChangeInstallationDirectory": true,
     "createDesktopShortcut": true,
-    "createStartMenuShortcut": true
+    "createStartMenuShortcut": true,
+    "shortcutName": "AI Assistant",
+    "include": "build/installer.nsh"
   },
   "publish": {
-    "provider": "github",
-    "releaseType": "release"
+    "provider": "generic",
+    "url": "https://your-update-server.com"
   }
 }
